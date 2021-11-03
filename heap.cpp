@@ -118,7 +118,26 @@ void Heap::descida(int index, int bottom)
 
 void Heap::subida(int index, int root)
 {
+    int parent = (index - 1) / 2;
 
+    if (parent < root)
+        return;
+
+    // Se o pai tem uma prioridade menor que o elemento,
+    // isso viola a regra da HEAP, onde quem tem
+    // mais prioridade precisa ficar no topo,
+    // e eles têm que ser trocados
+    if (cadastro[parent]->getPriority() < cadastro[index]->getPriority())
+    {
+        Account* aux = cadastro[parent];
+        cadastro[parent] = cadastro[index];
+        cadastro[index] = aux;
+
+        // Depois que subimos o elemento, precisamos
+        // verificar se o pai dele precisa ser subido também
+        // então seguimos recursivamente
+        subida(parent, root);
+    }
 }
 
 void Heap::print() const {
