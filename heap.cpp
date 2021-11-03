@@ -79,6 +79,40 @@ bool Heap::isEmpty() const
 
 void Heap::descida(int index, int bottom)
 {
+    if (index > bottom)
+        return;
+
+    int child1 = index * 2 + 1;
+    int child2 = index * 2 + 2;
+
+    int childToSwap;
+
+    // Para descer um elemento, a verificação / troca
+    // precisa ser feita com o filho de maior prioridade
+    if (cadastro[child1]->getPriority() < cadastro[child2]->getPriority())
+    {
+        childToSwap = child2;
+    }
+    else
+    {
+        childToSwap = child1;
+    }
+
+    // Se o filho tem uma prioridade maior que o elemento,
+    // isso viola a regra da HEAP, onde quem tem
+    // mais prioridade precisa ficar no topo,
+    // e eles têm que ser trocados
+    if (cadastro[childToSwap]->getPriority() > cadastro[index]->getPriority())
+    {
+        Account* aux = cadastro[childToSwap];
+        cadastro[childToSwap] = cadastro[index];
+        cadastro[index] = aux;
+
+        // Depois que descemos o elemento, precisamos
+        // verificar se o pai dele precisa ser descido também
+        // então seguimos recursivamente
+        descida(childToSwap, bottom);
+    }
 
 }
 
