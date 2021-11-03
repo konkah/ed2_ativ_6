@@ -1,7 +1,7 @@
 #include "heap.h" 
 #include <cstddef>
 #include <new>
-
+#include <tgmath.h>
 
 Heap::Heap(int MAX_ITEMS) {
   this->MAX_ITEMS = MAX_ITEMS;
@@ -149,4 +149,107 @@ void Heap::print() const {
       }
   }
   std::cout << "FIM" << std::endl;
+}
+
+void Heap::printTree() const {
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+	if (length == 0)
+	{
+        std::cout << "<Vazia>";
+	}
+
+	int lastOfLine = 2;
+    int levels = log2(length);
+
+	for (int i = 0; i < length; i++) {
+        Account* acc = cadastro[i];
+
+    	if (acc != NULL) {
+
+    		int level = log2(i+1);
+    		int spaces = pow(2, levels - level) - 1;
+
+    		for(int l = 0; l < spaces; l++)
+    		{
+    			if (l < spaces/2)
+    			{
+                    std::cout << "              ";
+    			}
+    			else if (l > spaces / 2)
+                {
+                    std::cout << "--------------";
+                }
+                else
+    			{
+                    std::cout << "_______-------";
+    			}
+            }
+
+            if (i < 10)
+            {
+                std::cout << "0";
+            }
+
+            std::cout << i << ":";
+
+        	if (acc->getAccountNumber() < 10000)
+        	{
+                std::cout << "0";
+        	}
+
+            std::cout << acc->getAccountNumber() << ", " << acc->getBalance();
+
+            if (acc->getBalance() < 1000)
+            {
+                std::cout << " ";
+
+                if (acc->getBalance() < 100)
+	            {
+	                std::cout << " ";
+
+	                if (acc->getBalance() < 10)
+	                {
+	                    std::cout << " ";
+	                }
+	            }
+            }
+
+            for (int l = 0; l < spaces; l++)
+            {
+                if (l < spaces / 2)
+                {
+                    std::cout << "--------------";
+                }
+                else if (l > spaces / 2)
+                {
+                    std::cout << "              ";
+                }
+                else
+                {
+                    std::cout << "-------_______";
+                }
+            }
+
+        	if ((i + 1) == (lastOfLine - 1))
+        	{
+                std::cout << std::endl;
+        		lastOfLine = lastOfLine * 2;
+        	}
+        	else
+        	{
+                std::cout << "              ";
+            }
+        }
+    }
+
+	if ((length + 1) == (lastOfLine - 1))
+	{
+        std::cout << std::endl;
+	}
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
 }

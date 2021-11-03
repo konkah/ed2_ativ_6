@@ -50,6 +50,7 @@ class Heap
   bool isEmpty() const;
   bool isFull()  const;
   void print()   const;
+  void printTree()   const;
 
   /*
     Alguns métodos para empilhar e desempilhar elementos da heap.

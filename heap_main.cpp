@@ -8,7 +8,7 @@ using namespace std;
 
 int main(){
   Heap heap;
-  heap.print();
+  heap.printTree();
   int numbers [7] = {12704, 31300, 1234, 49001, 52202, 65606, 91234};
   int balances[7] = {10,    100,   1000,     5,    15,    20, 25   }; 
 	    
@@ -18,7 +18,7 @@ int main(){
 
   }
 
-  heap.print();
+  heap.printTree();
   
   cout << "------------------------------" <<  endl;
 
@@ -29,6 +29,6 @@ int main(){
   Account account = heap.dequeue();
   cout << account.getAccountNumber() << " -> " << account.getBalance() << endl;
   cout << "------------------------------" <<  endl;
-  heap.print();
+  heap.printTree();
   cout << "Fim Original" << endl;
 }
